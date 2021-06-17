@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// Moving location points.
 const pointsSchema = new mongoose.Schema({
     timestamp: Number,
     coords: {
@@ -14,8 +15,8 @@ const pointsSchema = new mongoose.Schema({
 
 const trackSchema = new mongoose.Schema({
     userId: {
-        type: mongoose.Schema.Types.ObjectId, //Refrence to another object within MongoDB.
-        ref: 'User' //Pointing to the User model.
+        type: mongoose.Schema.Types.ObjectId, // Refrence to another object within MongoDB.
+        ref: 'User' // Pointing to the User model.
    },
     name: {
         type: String,
