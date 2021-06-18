@@ -13,14 +13,8 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-/*
-UserSchema.pre (pre-save hook) - this function will run before saving a user instance.
 
-Using the function() keyword for the second argument since the user instance is stored
-in "this". Alternatively, if an arrow function is used then the value of "this" will be
-set within the context of this file.
-*/
-
+// UserSchema.pre runs before saving a user instance.
 userSchema.pre("save", function (next) {
   const user = this;
 
@@ -28,15 +22,6 @@ userSchema.pre("save", function (next) {
   if (!user.isModified("password")) {
     return next();
   }
-
-  /*
-bcrypt algorithm used for hashing the password.
-
-Salt - randomly generated characters.
-Hash - mixture of password and salt.
-
-First argument for genSalt is the complexity of the salt.
-*/
 
   bcrypt.genSalt(10, (err, salt) => {
     if (err) {
@@ -54,11 +39,7 @@ First argument for genSalt is the complexity of the salt.
   });
 });
 
-/*
-Comparing the password (candidatePassword) that the user enters to sign in
-with its previous saved instance.
-*/
-
+// Compare candidatePassword with previous saved instance.
 userSchema.methods.comparePassword = function (candidatePassword) {
   const user = this;
 
