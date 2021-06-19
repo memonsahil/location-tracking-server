@@ -1,6 +1,6 @@
 require("./models/User");
 require("./models/Track");
-const mongoURI = require("./mongoDB");
+const db = require("./mongoDB");
 const express = require("express");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(authRoutes);
 app.use(trackRoutes);
 
-mongoose.connect(mongoURI, {
+mongoose.connect(db.mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
