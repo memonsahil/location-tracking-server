@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
+    "db": "nodemon src/index.js",
     "tunnel": "ngrok http 3000"
   },
   "keywords": [],
