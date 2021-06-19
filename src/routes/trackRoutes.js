@@ -18,15 +18,17 @@ router.get("/tracks", async (req, res) => {
 router.post("/tracks", async (req, res) => {
   const { name, locations } = req.body;
 
-  if (!name || !locations) {
-    return res
-      .status(422)
-      .send({ error: "You must provide a name and a set of locations." });
+  if (typeof name !== "string" || name === "") {
+    return res.status(422).send({ error: "Enter a valid name" });
+  }
+
+  if (!locations) {
+    return res.status(422).send({ error: "Provide a set of locations" });
   }
 
   try {
     const track = new Track({
-      name: { $eq: name },
+      name: name,
       locations: locations,
       userId: req.user._id,
     });

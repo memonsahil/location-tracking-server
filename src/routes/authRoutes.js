@@ -2,25 +2,28 @@ const express = require("express");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const User = mongoose.model("User");
-const secretKey = require("../mongoDB");
+const db = require("../mongoDB");
 
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
   const { email, password } = req.body;
 
-  if (!email || !password) {
-    return res.status(422).send({ error: "Invalid password or email" });
+  if (
+    (typeof email !== "string" || email === "") &&
+    (typeof password !== "string" || password === "")
+  ) {
+    return res.status(422).send({ error: "Enter valid credential" });
   }
 
   try {
     const user = new User({
-      email: { $eq: email },
-      password: { $eq: password },
+      email: email,
+      password: password,
     });
     await user.save();
 
-    const token = jwt.sign({ userId: user._id }, secretKey); // Add jwt
+    const token = jwt.sign({ userId: user._id }, db.secretKey); // Add jwt
     res.send({ token: token });
   } catch (err) {
     return res.status(422).send(err.message);
@@ -30,21 +33,24 @@ router.post("/signup", async (req, res) => {
 router.post("/Signin", async (req, res) => {
   const { email, password } = req.body;
 
-  if (!email || !password) {
-    return res.status(422).send({ error: "Invalid password or email" });
+  if (
+    (typeof email !== "string" || email === "") &&
+    (typeof password !== "string" || password === "")
+  ) {
+    return res.status(422).send({ error: "Enter valid credential" });
   }
 
-  const user = await User.findOne({ email: { $eq: email } });
+  const user = await User.findOne({ email: email });
   if (!user) {
-    return res.status(422).send({ error: "Invalid password or email" });
+    return res.status(422).send({ error: "Enter valid credential" });
   }
 
   try {
     await user.comparePassword(password);
-    const token = jwt.sign({ userId: user._id }, secretKey); // Update jwt
+    const token = jwt.sign({ userId: user._id }, db.secretKey); // Restore jwt
     res.send({ token: token });
   } catch (err) {
-    return res.status(422).send({ error: "Invalid password or email" });
+    return res.status(422).send({ error: "Enter valid credential" });
   }
 });
 
