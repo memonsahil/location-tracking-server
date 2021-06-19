@@ -13,7 +13,10 @@ router.post("/signup", async (req, res) => {
   }
 
   try {
-    const user = new User({ email, password });
+    const user = new User({
+      email: { $eq: email },
+      password: { $eq: password },
+    });
     await user.save();
 
     const token = jwt.sign({ userId: user._id }, "MY_SECRET_KEY"); // Add jwt
@@ -30,7 +33,7 @@ router.post("/Signin", async (req, res) => {
     return res.status(422).send({ error: "Invalid password or email" });
   }
 
-  const user = await User.findOne({ email: email });
+  const user = await User.findOne({ email: { $eq: email } });
   if (!user) {
     return res.status(422).send({ error: "Invalid password or email" });
   }
