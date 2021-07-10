@@ -1,6 +1,6 @@
 # location-tracking-server
 
-![Maintenance](https://img.shields.io/badge/Maintained%3F-no-red.svg)
+![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)
 ![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)
 
