@@ -10,7 +10,7 @@ API to interact with a [mongoDB](https://www.mongodb.com/cloud/atlas/) database 
 
 1. Clone the repository.
 
-2. Install [ngrok](https://github.com/bubenshchykov/ngrok) globally to create a proxy URL to access the database from a real device:
+2. Install ngrok globally to create a proxy URL to access the database from a real device:
 
 ```
 npm i -g ngrok
