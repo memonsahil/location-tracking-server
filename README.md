@@ -4,35 +4,37 @@
 ![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)
 
-API to interact with a mongoDB database for the [Location Tracking](https://github.com/memonsahil/location-tracking) app. Built using [Express](https://expressjs.com/) and [Mongoose](https://mongoosejs.com/).
+API to interact with a [mongoDB](https://www.mongodb.com/cloud/atlas/) database for the [Location Tracking](https://github.com/memonsahil/location-tracking) app. Built using [Express](https://expressjs.com/) and [Mongoose](https://mongoosejs.com/).
 
 ## Setup
 
-1. Install the project using npm:
+1. Clone the repository.
+
+2. Install [ngrok](https://github.com/bubenshchykov/ngrok) globally to create a proxy URL to access the database from a real device:
 
 ```
-$ cd location-tracking-server && npm install
+npm i -g ngrok
 ```
 
-2. Install ngrok globally to create a proxy URL for the database:
+3. Install the project:
 
 ```
-$ npm install -g ngrok
+cd location-tracking-server && npm i
 ```
 
-3. Connect to the database:
+4. Connect to the database:
 
 ```
-$ npm run db
+npx nodemon src/index.js
 ```
 
-4. Launch the ngrok server:
+5. Launch the ngrok server:
 
 ```
-$ npm run tunnel
+ngrok http 3000
 ```
 
-5. Replace the baseURL in the [API](https://github.com/memonsahil/location-tracking/blob/master/src/api/tracker.js) within the location-tracking project with the ngrok forwarded URL.
+6. Replace the baseURL in the [API](https://github.com/memonsahil/location-tracking/blob/master/src/api/tracker.js) within the location-tracking project with the ngrok forwarded URL.
 
 After completing the above steps, the Location Tracking app will connect to the database on launch.
 
