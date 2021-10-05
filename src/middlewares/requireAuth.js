@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const User = mongoose.model("User");
-const db = require("../mongoDB");
+//const db = require("../mongoDB");
 
 requireAuth = (req, res, next) => {
   const { authorization } = req.headers;
@@ -11,6 +11,10 @@ requireAuth = (req, res, next) => {
   }
 
   const token = authorization.replace("Bearer ", "");
+
+/*
+To connect to your mondoDB cluster, replace db.secretKey below
+with the secret key for your database cluster.
 
   jwt.verify(token, db.secretKey, async (err, payload) => {
     if (err) {
@@ -23,6 +27,7 @@ requireAuth = (req, res, next) => {
     req.user = user;
     next();
   });
+*/
 };
 
 module.exports = requireAuth;

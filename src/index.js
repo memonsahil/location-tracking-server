@@ -1,6 +1,6 @@
 require("./models/User");
 require("./models/Track");
-const db = require("./mongoDB");
+//const db = require("./mongoDB");
 const express = require("express");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
@@ -16,11 +16,16 @@ app.use(express.json());
 app.use(authRoutes);
 app.use(trackRoutes);
 
+/*
+To connect to your mondoDB cluster, replace db.mongoURI below
+with your database cluster's URI.
+
 mongoose.connect(db.mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
 });
+*/
 
 mongoose.connection.on("connected", () => {
   console.log("Connected to mongoDB instance!");

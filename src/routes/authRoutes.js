@@ -23,8 +23,13 @@ router.post("/signup", async (req, res) => {
     });
     await user.save();
 
+    /*
+    To connect to your mondoDB cluster, replace db.secretKey below
+    with the secret key for your database cluster.
+
     const token = jwt.sign({ userId: user._id }, db.secretKey); // Add jwt
     res.send({ token: token });
+    */
   } catch (err) {
     return res.status(422).send(err.message);
   }
